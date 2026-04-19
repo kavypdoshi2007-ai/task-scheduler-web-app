@@ -1,0 +1,72 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Nocturnal Palette */
+  --color-background: #0b1326;
+  --color-surface: #0b1326;
+  --color-surface-dim: #0b1326;
+  --color-surface-bright: #31394d;
+  --color-surface-container-lowest: #060e20;
+  --color-surface-container-low: #131b2e;
+  --color-surface-container: #171f33;
+  --color-surface-container-high: #222a3d;
+  --color-surface-container-highest: #2d3449;
+
+  --color-primary: #c0c1ff;
+  --color-primary-container: #8083ff;
+  --color-on-primary-container: #0d0096;
+
+  --color-secondary: #bcc7de;
+  --color-secondary-container: #3e495d;
+  --color-on-secondary-container: #aeb9d0;
+
+  --color-tertiary: #ffb2b7;
+  --color-tertiary-container: #ff516a;
+  --color-on-tertiary-container: #5b0017;
+
+  --color-outline: #908fa0;
+  --color-outline-variant: #464554;
+
+  --color-on-surface: #dae2fd;
+  --color-on-surface-variant: #c7c4d7;
+}
+
+@layer utilities {
+  .glass-surface {
+    background: rgba(23, 31, 51, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(70, 69, 84, 0.15);
+  }
+
+  .task-pulse {
+    position: relative;
+  }
+
+  .task-pulse::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 rgba(192, 193, 255, 0.4);
+    animation: pulse-ring 2s infinite;
+  }
+}
+
+@keyframes pulse-ring {
+  0% { transform: translateY(-50%) scale(0.95); box-shadow: 0 0 0 0 rgba(192, 193, 255, 0.7); }
+  70% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 10px rgba(192, 193, 255, 0); }
+  100% { transform: translateY(-50%) scale(0.95); box-shadow: 0 0 0 0 rgba(192, 193, 255, 0); }
+}
+
+body {
+  @apply bg-background text-on-surface font-sans selection:bg-primary-container/30;
+}
